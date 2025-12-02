@@ -1,9 +1,84 @@
 @use "./variables" as *;
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: inherit;
+}
+
+/* paragraphs */
+p {
+  margin: 0;
+}
+
+/* lists */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* buttons */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  font: inherit;
+  color: inherit;
+
+  appearance: none;
+  cursor: pointer;
+}
+
+/* inputs / selects / textarea */
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* textarea */
+textarea {
+  resize: vertical; // або none, якщо хочеш
+}
+
+/* images */
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* hr */
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 0;
 }
 
 html,
@@ -12,4 +87,13 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #181818;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
