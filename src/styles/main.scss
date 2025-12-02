@@ -1,0 +1,10 @@
+@use "./variables" as *;
+@use "./base";
+
+.app {
+  padding: 32px;
+
+  h1 {
+    color: $primary;
+  }
+}
