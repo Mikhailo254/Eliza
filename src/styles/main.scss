@@ -1,10 +1,10 @@
 @use "./variables" as *;
 @use "./base";
 
-.app {
-  padding: 32px;
-
-  h1 {
-    color: $primary;
-  }
-}
+// компоненти
+@use "./layout";
+@use "./header";
+@use "./sidebar";
+@use "./top-nav";
+@use "./main-area";
+@use "./footer";

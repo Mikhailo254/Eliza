@@ -1,8 +1,15 @@
 @use "./variables" as *;
 
-body {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
   margin: 0;
-  background: $bg;
-  color: $text;
-  font-family: system-ui, sans-serif;
+  padding: 0;
+  height: 100%;
 }
