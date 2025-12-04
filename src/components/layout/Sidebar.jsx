@@ -2,16 +2,19 @@ function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar__list">
-        <h2>Список полів</h2>
+        <h2>Список фільтрів</h2>
         <ul>
-          <li>Поле 1</li>
-          <li>Поле 2</li>
-          <li>Поле 3</li>
+          <li>Фільтр 1</li>
+          <li>Фільтр 2</li>
+          <li>Фільтр 3</li>
         </ul>
       </div>
 
       <div className="sidebar__bottom">
-        <p>Тут буде додаткова інформація / фільтри.</p>
+        <p>
+          Порожня зона (за потреби в процесі розробки можна буде придумати чим
+          її задіяти)
+        </p>
       </div>
     </aside>
   );

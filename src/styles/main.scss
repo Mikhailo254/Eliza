@@ -1,6 +1,8 @@
 @use "./variables" as *;
 @use "./base";
 
+@use "leaflet/dist/leaflet.css";
+
 // компоненти
 @use "./layout";
 @use "./header";
@@ -8,3 +10,18 @@
 @use "./top-nav";
 @use "./main-area";
 @use "./footer";
+@use "./fields-page";
+@use "./field-card";
+@use "./field-modal";
+/* ==== Фіксуємо лейаут і скрол тільки в main-area ==== */
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden; // забороняємо скрол усього body
+}

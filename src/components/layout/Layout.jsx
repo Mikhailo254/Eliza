@@ -4,7 +4,11 @@ import Sidebar from "./Sidebar";
 import MainArea from "./MainArea";
 import Footer from "./Footer";
 
+import { useState } from "react";
+
 function Layout() {
+  const [activeTab, setActiveTab] = useState("fields");
+
   return (
     <div className="app">
       <Header />
@@ -13,8 +17,8 @@ function Layout() {
         <Sidebar />
 
         <div className="app__main">
-          <TopNav />
-          <MainArea />
+          <TopNav activeTab={activeTab} onTabChange={setActiveTab} />
+          <MainArea activeTab={activeTab} />
         </div>
       </div>
 

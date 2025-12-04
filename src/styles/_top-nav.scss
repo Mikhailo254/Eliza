@@ -25,6 +25,18 @@
   border: 1px solid rgb(96, 69, 69);
 
   &:hover {
-    background: rgb(167, 119, 140);
+    background: rgb(193, 102, 108);
+  }
+
+  &--active {
+    font-weight: 900;
+    color: #dddddd;
+    text-shadow: 0px 0px 10px #000000;
+    background-color: #4d4e50;
+    border: none;
+    /* інверсія кольору / бордер — як хочеш */
+    &:hover {
+      background: #4d4e50;
+    }
   }
 }
