@@ -1,20 +1,23 @@
+// src/styles/_layout.scss
+@use "./variables" as *;
+
 .app {
-  height: calc(100vh - 75px); // або height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #111827;
-  color: #e5e7eb;
+  background: $app-bg;
+  color: $text-main;
 
   &__body {
-    flex: 1; // займає все між хедером і футером
+    flex: 1;
     display: flex;
-    min-height: 0; // щоб не вилазило за екран
+    min-height: 0; // щоб внутрішній контент не вилазив за висоту
   }
 
   &__main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 0; // щоб main-area не вилазив
+    min-height: 0; // щоб .main-area могла нормально скролитись
   }
 }

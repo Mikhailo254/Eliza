@@ -1,13 +1,12 @@
+// src/styles/_top-nav.scss
+@use "./variables" as *;
+
 .top-nav {
-  flex: 0 0 48px;
-  height: 48px;
+  flex: 0 0 $top-nav-height;
+  height: $top-nav-height;
   width: 100%;
-
   display: flex;
-  padding: 0; // ❗ прибираємо
-  gap: 0; // ❗ прибираємо
-
-  background: rgb(167, 119, 119);
+  background: $tabs-bg;
 }
 
 .top-nav__item {
@@ -18,25 +17,27 @@
   align-items: center;
   justify-content: center;
 
-  color: #e5e7eb;
+  color: $text-main;
   cursor: pointer;
   font-size: 14px;
   user-select: none;
-  border: 1px solid rgb(96, 69, 69);
+  border: 1px solid $tabs-border;
+  background: transparent;
+  padding: 0;
 
   &:hover {
-    background: rgb(193, 102, 108);
+    background: $tabs-hover-bg;
   }
 
   &--active {
     font-weight: 900;
-    color: #dddddd;
-    text-shadow: 0px 0px 10px #000000;
-    background-color: #4d4e50;
+    color: $text-muted;
+    text-shadow: 0 0 10px #000000;
+    background-color: $panel-bg;
     border: none;
-    /* інверсія кольору / бордер — як хочеш */
+
     &:hover {
-      background: #4d4e50;
+      background: $panel-bg;
     }
   }
 }

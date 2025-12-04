@@ -8,26 +8,18 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import area from "@turf/area";
-
-const DEFAULT_CENTER = [49.0, 32.0];
-const DEFAULT_ZOOM = 15;
+import {
+  DEFAULT_CENTER,
+  DEFAULT_ZOOM,
+  geometryToPoints,
+} from "./fieldGeometry";
 
 function FieldMapEditor({ geometry, view, onGeometryChange, onViewChange }) {
   const [points, setPoints] = useState([]);
 
   useEffect(() => {
-    if (
-      geometry &&
-      geometry.type === "Polygon" &&
-      Array.isArray(geometry.coordinates) &&
-      geometry.coordinates.length > 0
-    ) {
-      const ring = geometry.coordinates[0] || [];
-      const pts = ring.slice(0, -1).map(([lng, lat]) => ({ lat, lng }));
-      setPoints(pts);
-    } else {
-      setPoints([]);
-    }
+    const pts = geometryToPoints(geometry);
+    setPoints(pts);
   }, [geometry]);
 
   const initialCenter =
@@ -81,7 +73,6 @@ function FieldMapEditor({ geometry, view, onGeometryChange, onViewChange }) {
     return null;
   }
 
-  // важливо: key, щоб при зміні view карта перемаунчувалася
   const mapKey = `${initialCenter[0].toFixed(4)}-${initialCenter[1].toFixed(
     4
   )}-${initialZoom}`;

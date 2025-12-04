@@ -1,26 +1,26 @@
 // src/components/layout/MainArea.jsx
-import FieldsPage from "./MainArea/FieldsPage/FieldsPage";
+import FieldsPage from "./pages/FieldsPage/FieldsPage";
+
+function Placeholder({ text }) {
+  return <div>{text}</div>;
+}
+
+const TAB_COMPONENTS = {
+  fields: <FieldsPage />,
+
+  cultures: <Placeholder text='Тут буде підсистема "Культури".' />,
+  machines: <Placeholder text='Тут буде підсистема "Техніка".' />,
+  workers: <Placeholder text='Тут буде підсистема "Робітники".' />,
+  resources: <Placeholder text='Тут буде підсистема "Ресурси".' />,
+  weather: <Placeholder text='Тут буде модуль "Погодні сценарії".' />,
+  calendar: <Placeholder text="Тут буде календар робіт." />,
+  profile: <Placeholder text='Тут буде "Особистий кабінет".' />,
+};
 
 function MainArea({ activeTab }) {
   return (
     <main className="main-area">
-      {activeTab === "fields" && <FieldsPage />}
-
-      {activeTab === "cultures" && <div>Тут буде підсистема "Культури".</div>}
-
-      {activeTab === "machines" && <div>Тут буде підсистема "Техніка".</div>}
-
-      {activeTab === "workers" && <div>Тут буде підсистема "Робітники".</div>}
-
-      {activeTab === "resources" && <div>Тут буде підсистема "Ресурси".</div>}
-
-      {activeTab === "weather" && (
-        <div>Тут буде модуль "Погодні сценарії".</div>
-      )}
-
-      {activeTab === "calendar" && <div>Тут буде календар робіт.</div>}
-
-      {activeTab === "profile" && <div>Тут буде "Особистий кабінет".</div>}
+      {TAB_COMPONENTS[activeTab] || <div>Невідома вкладка: {activeTab}</div>}
     </main>
   );
 }

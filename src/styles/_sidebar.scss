@@ -1,11 +1,14 @@
+// src/styles/_sidebar.scss
+@use "./variables" as *;
+
 /* SIDEBAR */
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 260px;
-  border-right: 1px solid #1f2937;
-  background: #646b8d;
+  width: $sidebar-width;
+  border-right: 1px solid $border-main;
+  background: $sidebar-bg;
 
   &__list {
     padding: 16px;
@@ -20,8 +23,8 @@
 
   &__bottom {
     padding: 12px 16px;
-    border-top: 1px solid #1f2937;
-    background: #0f172a;
+    border-top: 1px solid $border-main;
+    background: $sidebar-bottom-bg;
     font-size: 13px;
     height: 20%;
     display: flex;

@@ -1,3 +1,23 @@
-$primary: #e09595;
-$bg: #313336;
-$text: #ffffff;
+// src/styles/_variables.scss
+
+// Основні кольори додатку
+$app-bg: #111827;
+$panel-bg: #4d4e50;
+$sidebar-bg: #646b8d;
+$sidebar-bottom-bg: #0f172a;
+$header-footer-bg: #404d87;
+
+$border-main: #1f2937;
+
+$text-main: #e5e7eb;
+$text-muted: #dddddd;
+
+// Top-nav
+$tabs-bg: rgb(167, 119, 119);
+$tabs-border: rgb(96, 69, 69);
+$tabs-hover-bg: rgb(193, 102, 108);
+
+// Розміри
+$bar-height: 70px;
+$top-nav-height: 48px;
+$sidebar-width: 260px;

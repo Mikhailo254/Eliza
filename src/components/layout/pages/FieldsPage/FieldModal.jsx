@@ -1,10 +1,12 @@
 // src/components/layout/MainArea/FieldsPage/FieldModal.jsx
 import { useState } from "react";
 import FieldMapEditor from "./FieldMapEditor";
-import { MAX_TOTAL_FIELD_PARAMS } from "./FieldsPage";
+import {
+  MAX_TOTAL_FIELD_PARAMS,
+  MAX_PREDECESSORS,
+  CROP_OPTIONS,
+} from "./fieldConfig";
 
-const CROP_OPTIONS = ["Соя", "Пшениця", "Ячмінь", "Кукурудза", "Соняшник"];
-const MAX_PREDECESSORS = 10;
 const CURRENT_YEAR = new Date().getFullYear();
 
 function FieldModal({ field, onSave, onDelete, onClose }) {
@@ -20,10 +22,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
   const [isEditingPredecessors, setIsEditingPredecessors] = useState(false);
   const [isExpandedPredecessors, setIsExpandedPredecessors] = useState(false);
 
-  // режим редагування параметрів (рядків)
   const [isEditingAttributes, setIsEditingAttributes] = useState(false);
-
-  // записник відкритий / закритий
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
 
   const handleChange = (e) => {
@@ -33,9 +32,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({
-      ...form,
-    });
+    onSave({ ...form });
   };
 
   /* ===== МАПА: геометрія + площа ===== */
@@ -160,10 +157,8 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
     indicesToShow = predecessors.map((_, idx) => idx);
   } else if (isExpandedPredecessors) {
     indicesToShow = nonEmptyIndices.map((x) => x.idx);
-  } else {
-    if (nonEmptyIndices.length > 0) {
-      indicesToShow = [nonEmptyIndices[0].idx];
-    }
+  } else if (nonEmptyIndices.length > 0) {
+    indicesToShow = [nonEmptyIndices[0].idx];
   }
 
   const canToggleByTitle = !isEditingPredecessors && nonEmptyIndices.length > 0;
@@ -182,7 +177,6 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
       >
         <h3>Редагування поля</h3>
 
-        {/* інтерактивна мапа */}
         <FieldMapEditor
           geometry={form.geometry}
           view={form.mapView}
@@ -191,7 +185,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
         />
 
         <form onSubmit={handleSubmit} className="modal__form">
-          {/* БЛОК: Параметри ділянки (включно з Назвою) */}
+          {/* ПАРАМЕТРИ ДІЛЯНКИ */}
           <div className="modal__attributes">
             <div className="modal__attributes-header">
               <span>Параметри ділянки (до {MAX_TOTAL_FIELD_PARAMS})</span>
@@ -222,7 +216,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
               )}
             </div>
 
-            {/* Рядок "Назва" – окремо, але в тому ж блоці */}
+            {/* Назва ділянки */}
             <div className="modal__attr-row">
               <div className="modal__attr-name">Назва</div>
               {isEditingAttributes ? (
@@ -284,7 +278,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
             ))}
           </div>
 
-          {/* БЛОК: Попередники культур */}
+          {/* ПОПЕРЕДНИКИ */}
           <div className="modal__predecessors">
             <div className="modal__predecessors-header">
               <span
@@ -301,7 +295,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
                   }
                 }}
               >
-                Попередники культур (0–10)
+                Попередники культур (0–{MAX_PREDECESSORS})
               </span>
 
               <button
@@ -381,7 +375,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
               )}
           </div>
 
-          {/* БЛОК: Записник */}
+          {/* ЗАПИСНИК */}
           <div className="modal__notebook">
             <div className="modal__notebook-header">
               <span>Записник</span>

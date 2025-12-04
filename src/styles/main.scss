@@ -1,6 +1,6 @@
+// src/styles/main.scss
 @use "./variables" as *;
 @use "./base";
-
 @use "leaflet/dist/leaflet.css";
 
 // компоненти
@@ -10,11 +10,14 @@
 @use "./top-nav";
 @use "./main-area";
 @use "./footer";
-@use "./fields-page";
-@use "./field-card";
-@use "./field-modal";
+
+// сторінки
+@use "./pages/FieldPage/fields-page";
+@use "./pages/FieldPage/field-card";
+@use "./pages/FieldPage/field-modal";
 /* ==== Фіксуємо лейаут і скрол тільки в main-area ==== */
 
+// Базова висота для всього додатку
 html,
 body,
 #root {
@@ -23,5 +26,7 @@ body,
 }
 
 body {
-  overflow: hidden; // забороняємо скрол усього body
+  overflow: hidden;
+  background: $app-bg;
+  color: $text-main;
 }

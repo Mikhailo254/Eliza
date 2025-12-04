@@ -1,12 +1,17 @@
+// src/styles/_main-area.scss
+@use "./variables" as *;
+
 /* ОСНОВНА РОБОЧА ОБЛАСТЬ */
 
 .main-area {
   flex: 1;
   padding: 16px 24px;
-  overflow: auto;
   min-height: 0;
-  background: #4d4e50;
   width: 100%;
-  overflow-y: auto; // ← скрол з’являється тут
+
+  background: $panel-bg;
+
+  // Скрол тільки по вертикалі, горизонтальний ховаємо
+  overflow-y: auto;
   overflow-x: hidden;
 }

@@ -1,10 +1,9 @@
+import { useState } from "react";
 import Header from "./Header";
 import TopNav from "./TopNav";
 import Sidebar from "./Sidebar";
 import MainArea from "./MainArea";
 import Footer from "./Footer";
-
-import { useState } from "react";
 
 function Layout() {
   const [activeTab, setActiveTab] = useState("fields");
