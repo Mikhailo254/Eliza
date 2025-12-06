@@ -1,0 +1,160 @@
+// styles/pages/MachinesPage/_machines-page.scss
+
+.machines-page {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    text-align: left;
+    flex: 0 0 auto;
+  }
+
+  .machines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    flex: 1 1 auto;
+  }
+}
+
+.machine-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  /* Додаємо фіксовану висоту, щоб 50% працювали коректно */
+  height: 260px; // можеш підкрутити під свій смак
+
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+
+  background: #374151;
+  color: #e5e7eb;
+
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease,
+    border-color 0.12s ease;
+
+  &:hover {
+    background: #4b5563;
+    border-color: #6b7280;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    transform: translateY(-1px);
+  }
+
+  /* ---- НОВЕ: блок з картинкою ---- */
+  &__image {
+    flex: 0 0 50%; // 50% висоти картки
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: #111827;
+    border: 1px solid #4b5563;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // щоб фото красиво обрізалось
+      display: block;
+    }
+  }
+  &__image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #111827;
+    color: #9ca3af;
+    font-size: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+  }
+
+  /* Низ картки (заголовок + атрибути) займає решту 50% */
+  &__content {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    strong {
+      font-size: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__type {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #6b7280;
+    color: #e5e7eb;
+    white-space: nowrap;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  &__attr {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    &-label {
+      color: #d1d5db;
+    }
+
+    &-value {
+      color: #f9fafb;
+      text-align: right;
+      max-width: 140px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__operations {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #9ca3af;
+  }
+
+  &--add {
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #d1d5db;
+    border-style: dashed;
+    border-color: #6b7280;
+    background: #1f2933;
+
+    &:hover {
+      background: #374151;
+      border-color: #9ca3af;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+}

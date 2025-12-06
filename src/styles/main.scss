@@ -15,6 +15,10 @@
 @use "./pages/FieldPage/fields-page";
 @use "./pages/FieldPage/field-card";
 @use "./pages/FieldPage/field-modal";
+
+@use "./pages/MachinesPage/machines-page";
+//@use "./pages/MachinesPage/machine-card";
+@use "./pages/MachinesPage/machine-modal";
 /* ==== Фіксуємо лейаут і скрол тільки в main-area ==== */
 
 // Базова висота для всього додатку
