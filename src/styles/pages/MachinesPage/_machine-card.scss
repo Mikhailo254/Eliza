@@ -1,0 +1,146 @@
+// src/styles/pages/MachinesPage/_machine-card.scss
+@use "../../variables" as *;
+
+.machine-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  /* Фіксована висота, щоб верх/низ працювали стабільно */
+  height: 260px;
+
+  padding: 8px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-subtle;
+
+  background: $color-card-bg;
+  color: $color-text-secondary;
+
+  cursor: pointer;
+  text-align: left;
+
+  box-shadow: $shadow-card;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease,
+    border-color 0.12s ease;
+
+  &:hover {
+    background: $color-card-bg-hover;
+    border-color: $color-border-strong;
+    box-shadow: $shadow-card-strong;
+    transform: translateY(-1px);
+  }
+
+  /* Блок з картинкою */
+  &__image {
+    flex: 0 0 50%; // 50% висоти картки
+    width: 100%;
+    border-radius: $radius-sm;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: $color-body-bg;
+    border: 1px solid $color-border-strong;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: $color-body-bg;
+    color: $color-text-muted;
+    font-size: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: $radius-sm;
+  }
+
+  /* Низ картки (заголовок + атрибути) */
+  &__content {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    strong {
+      font-size: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: $color-text-primary;
+    }
+  }
+
+  &__type {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: $radius-pill;
+    background: $color-border-strong;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  &__attr {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    &-label {
+      color: $color-text-soft;
+    }
+
+    &-value {
+      color: $color-text-primary;
+      text-align: right;
+      max-width: 140px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__operations {
+    margin-top: 4px;
+    font-size: 12px;
+    color: $color-text-muted;
+  }
+
+  /* Картка-додавалка */
+  &--add {
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: $color-text-soft;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+
+    &:hover {
+      background: $color-card-bg;
+      border-color: $color-text-muted;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+}

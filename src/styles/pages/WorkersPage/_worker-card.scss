@@ -1,0 +1,155 @@
+// src/styles/pages/WorkersPage/_worker-card.scss
+@use "../../variables" as *;
+.worker-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 260px;
+
+  padding: 8px;
+  border-radius: $radius-md;
+  border: 1px solid $color-border-subtle;
+
+  background: $color-card-bg;
+  color: $color-text-secondary;
+
+  cursor: pointer;
+  text-align: left;
+
+  box-shadow: $shadow-card;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease,
+    border-color 0.12s ease;
+
+  &:hover {
+    background: $color-card-bg-hover;
+    border-color: $color-border-strong;
+    box-shadow: $shadow-card-strong;
+    transform: translateY(-1px);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    strong {
+      font-size: 15px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: $color-text-primary;
+    }
+  }
+
+  &__status {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: $radius-pill;
+    border: 1px solid $color-border-subtle;
+    white-space: nowrap;
+
+    &--active {
+      background: rgba($color-success, 0.2);
+      border-color: rgba($color-success, 0.6);
+      color: #bbf7d0;
+    }
+
+    &--inactive {
+      background: rgba($color-danger, 0.16);
+      border-color: rgba($color-danger, 0.5);
+      color: #fecaca;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    flex: 1 1 auto;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    flex: 1 1 auto;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__label {
+    color: $color-text-soft;
+  }
+
+  &__value {
+    color: $color-text-primary;
+    max-width: 150px;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Фото */
+
+  &__photo-block {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+  }
+
+  &__photo-label {
+    font-size: 12px;
+    color: $color-text-soft;
+    display: flex;
+    align-items: center;
+  }
+
+  &__photo-frame {
+    width: 50%;
+    height: 125px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  &__photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__photo-placeholder {
+    font-size: 18px;
+    color: $color-border-subtle;
+  }
+
+  &--add {
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: $color-text-soft;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+
+    &:hover {
+      background: $color-card-bg;
+      border-color: $color-text-muted;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+}

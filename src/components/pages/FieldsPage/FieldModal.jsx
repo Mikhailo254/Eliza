@@ -1,4 +1,4 @@
-// src/components/layout/MainArea/FieldsPage/FieldModal.jsx
+// src/components/pages/FieldsPage/FieldModal.jsx
 import { useState } from "react";
 import FieldMapEditor from "./FieldMapEditor";
 import {
@@ -9,7 +9,13 @@ import {
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-function FieldModal({ field, onSave, onDelete, onClose }) {
+function FieldModal({
+  field,
+  onSave,
+  onDelete,
+  onClose,
+  initialEditing = false,
+}) {
   const [form, setForm] = useState({
     ...field,
     predecessors: field.predecessors || [],
@@ -19,10 +25,13 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
     notebook: field.notebook || "",
   });
 
-  const [isEditingPredecessors, setIsEditingPredecessors] = useState(false);
+  // Глобальний режим: перегляд / редагування (як у MachineModal)
+  const [isEditing, setIsEditing] = useState(initialEditing);
+
+  // Попередники: тільки розгортання/згортання списку
   const [isExpandedPredecessors, setIsExpandedPredecessors] = useState(false);
 
-  const [isEditingAttributes, setIsEditingAttributes] = useState(false);
+  // Записник: чи показувати поле
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
 
   const handleChange = (e) => {
@@ -84,6 +93,8 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
   };
 
   const handleAddAttribute = () => {
+    if (!isEditing) return;
+
     setForm((prev) => {
       const attrs = prev.attributes || [];
       if (attrs.length >= MAX_TOTAL_FIELD_PARAMS) return prev;
@@ -99,6 +110,8 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
   };
 
   const handleRemoveAttribute = (index) => {
+    if (!isEditing) return;
+
     setForm((prev) => {
       const attrs = [...(prev.attributes || [])];
       attrs.splice(index, 1);
@@ -111,6 +124,8 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
   const predecessors = form.predecessors || [];
 
   const handleAddPredecessorRow = () => {
+    if (!isEditing) return;
+
     setForm((prev) => {
       const preds = prev.predecessors || [];
       if (preds.length >= MAX_PREDECESSORS) return prev;
@@ -118,20 +133,9 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
     });
   };
 
-  const handleToggleEditPredecessors = () => {
-    if (!isEditingPredecessors) {
-      setIsEditingPredecessors(true);
-      setIsExpandedPredecessors(true);
-      if (!predecessors.length) {
-        handleAddPredecessorRow();
-      }
-    } else {
-      setIsEditingPredecessors(false);
-      setIsExpandedPredecessors(false);
-    }
-  };
-
   const handlePredecessorChange = (index, value) => {
+    if (!isEditing) return;
+
     setForm((prev) => {
       const preds = [...(prev.predecessors || [])];
       preds[index] = value;
@@ -140,6 +144,8 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
   };
 
   const handleRemovePredecessor = (index) => {
+    if (!isEditing) return;
+
     setForm((prev) => {
       const preds = [...(prev.predecessors || [])];
       preds.splice(index, 1);
@@ -153,15 +159,18 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
 
   let indicesToShow = [];
 
-  if (isEditingPredecessors) {
+  if (isEditing) {
+    // У режимі редагування показуємо всі рядки
     indicesToShow = predecessors.map((_, idx) => idx);
   } else if (isExpandedPredecessors) {
+    // У перегляді, коли розгорнуто — всі заповнені
     indicesToShow = nonEmptyIndices.map((x) => x.idx);
   } else if (nonEmptyIndices.length > 0) {
+    // У перегляді, коли згорнуто — тільки перший заповнений
     indicesToShow = [nonEmptyIndices[0].idx];
   }
 
-  const canToggleByTitle = !isEditingPredecessors && nonEmptyIndices.length > 0;
+  const canToggleByTitle = !isEditing && nonEmptyIndices.length > 0;
 
   const handleBackdropClick = () => {
     onClose();
@@ -175,7 +184,28 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
           e.stopPropagation();
         }}
       >
-        <h3>Редагування поля</h3>
+        {/* Верхній заголовок + глобальний перемикач режиму (як у MachineModal) */}
+        <div className="modal__top">
+          <h3>Поле</h3>
+
+          {!isEditing ? (
+            <button
+              type="button"
+              className="modal__top-edit-btn"
+              onClick={() => setIsEditing(true)}
+            >
+              Редагувати
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="modal__top-edit-btn"
+              onClick={() => setIsEditing(false)}
+            >
+              Закінчити редагування
+            </button>
+          )}
+        </div>
 
         <FieldMapEditor
           geometry={form.geometry}
@@ -190,38 +220,23 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
             <div className="modal__attributes-header">
               <span>Параметри ділянки (до {MAX_TOTAL_FIELD_PARAMS})</span>
 
-              {!isEditingAttributes ? (
+              {isEditing && (
                 <button
                   type="button"
-                  onClick={() => setIsEditingAttributes(true)}
+                  onClick={handleAddAttribute}
+                  disabled={attributes.length >= MAX_TOTAL_FIELD_PARAMS}
                 >
-                  Редагувати рядки
+                  Створити рядок
                 </button>
-              ) : (
-                <>
-                  <button
-                    type="button"
-                    onClick={handleAddAttribute}
-                    disabled={attributes.length >= MAX_TOTAL_FIELD_PARAMS}
-                  >
-                    Створити
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setIsEditingAttributes(false)}
-                  >
-                    Завершити
-                  </button>
-                </>
               )}
             </div>
 
             {/* Назва ділянки */}
             <div className="modal__attr-row">
-              <div className="modal__attr-name">Назва</div>
-              {isEditingAttributes ? (
+              <div className="modal__attr-name modal__attr-row__V1">Назва</div>
+              {isEditing ? (
                 <input
-                  className="modal__attr-value"
+                  className="modal__attr-value modal__attr-row__V2"
                   name="name"
                   value={form.name || ""}
                   onChange={handleChange}
@@ -230,6 +245,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
               ) : (
                 <div className="modal__attr-value">{form.name || "—"}</div>
               )}
+              {/* Плейсхолдер під потенційну кнопку видалення, щоб сітка не зʼїжджала */}
               <span className="modal__predecessor-remove-placeholder" />
             </div>
 
@@ -241,7 +257,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
 
             {attributes.map((attr, index) => (
               <div key={attr.id || index} className="modal__attr-row">
-                {isEditingAttributes ? (
+                {isEditing ? (
                   <>
                     <input
                       className="modal__attr-name"
@@ -298,21 +314,18 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
                 Попередники культур (0–{MAX_PREDECESSORS})
               </span>
 
-              <button
-                type="button"
-                onClick={handleToggleEditPredecessors}
-                disabled={
-                  !isEditingPredecessors &&
-                  predecessors.length >= MAX_PREDECESSORS
-                }
-              >
-                {isEditingPredecessors
-                  ? "Закінчити додавання"
-                  : "Додати попередника"}
-              </button>
+              {isEditing && (
+                <button
+                  type="button"
+                  onClick={handleAddPredecessorRow}
+                  disabled={predecessors.length >= MAX_PREDECESSORS}
+                >
+                  Додати попередника
+                </button>
+              )}
             </div>
 
-            {!predecessors.length && !isEditingPredecessors && (
+            {!predecessors.length && !isEditing && (
               <p className="modal__predecessors-empty">
                 Дані про попередників відсутні.
               </p>
@@ -324,15 +337,13 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
 
               const rowClass =
                 "modal__predecessor-row" +
-                (!isEditingPredecessors
-                  ? " modal__predecessor-row--no-remove"
-                  : "");
+                (!isEditing ? " modal__predecessor-row--no-remove" : "");
 
               return (
                 <div key={index} className={rowClass}>
                   <span className="modal__predecessor-year">{year}</span>
 
-                  {isEditingPredecessors ? (
+                  {isEditing ? (
                     <select
                       value={pred}
                       onChange={(e) =>
@@ -352,7 +363,7 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
                     </div>
                   )}
 
-                  {isEditingPredecessors ? (
+                  {isEditing && (
                     <button
                       type="button"
                       className="modal__predecessor-remove"
@@ -360,19 +371,10 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
                     >
                       ×
                     </button>
-                  ) : null}
+                  )}
                 </div>
               );
             })}
-
-            {isEditingPredecessors &&
-              predecessors.length < MAX_PREDECESSORS && (
-                <div className="modal__predecessors-addmore">
-                  <button type="button" onClick={handleAddPredecessorRow}>
-                    Додати ще рядок
-                  </button>
-                </div>
-              )}
           </div>
 
           {/* ЗАПИСНИК */}
@@ -392,15 +394,19 @@ function FieldModal({ field, onSave, onDelete, onClose }) {
                 className="modal__notebook-text"
                 value={form.notebook}
                 onChange={(e) =>
+                  isEditing &&
                   setForm((prev) => ({ ...prev, notebook: e.target.value }))
                 }
                 placeholder="Тут ви можете залишити будь-які примітки щодо ділянки..."
+                readOnly={!isEditing}
               />
             )}
           </div>
 
           <div className="modal__buttons">
-            <button type="submit">Зберегти дані</button>
+            <button type="submit" disabled={!isEditing}>
+              Зберегти дані
+            </button>
             <button type="button" onClick={() => onDelete(form.id)}>
               Видалити поле
             </button>

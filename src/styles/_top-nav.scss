@@ -1,12 +1,12 @@
-// src/styles/_top-nav.scss
 @use "./variables" as *;
 
 .top-nav {
-  flex: 0 0 $top-nav-height;
-  height: $top-nav-height;
+  flex: 0 0 $layout-top-nav-height;
+  height: $layout-top-nav-height;
   width: 100%;
   display: flex;
-  background: $tabs-bg;
+  background: $color-tabs-bg;
+  border-bottom: 1px solid $color-tabs-border;
 }
 
 .top-nav__item {
@@ -17,27 +17,36 @@
   align-items: center;
   justify-content: center;
 
-  color: $text-main;
+  color: $color-text-muted;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 500;
   user-select: none;
-  border: 1px solid $tabs-border;
+  border-right: 1px solid $color-tabs-border;
   background: transparent;
   padding: 0;
 
+  transition: background-color 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:last-child {
+    border-right: none;
+  }
+
   &:hover {
-    background: $tabs-hover-bg;
+    background: $color-tabs-hover-bg;
+    color: $color-text-secondary;
   }
 
   &--active {
-    font-weight: 900;
-    color: $text-muted;
-    text-shadow: 0 0 10px #000000;
-    background-color: $panel-bg;
-    border: none;
+    font-weight: 600;
+    color: $color-text-primary;
+    background-color: $color-tabs-active-bg;
+    box-shadow: inset 0 -2px 0 $color-accent;
+    border-right: 1px solid transparent;
 
     &:hover {
-      background: $panel-bg;
+      background: $color-tabs-active-bg;
     }
   }
 }

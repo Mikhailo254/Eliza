@@ -1,4 +1,4 @@
-// src/components/layout/MainArea/MachinesPage/MachineCard.jsx
+// src/components/pages/MachinesPage/MachineCard.jsx
 import { findMachineType } from "./machineConfig";
 
 function MachineCard({ machine }) {

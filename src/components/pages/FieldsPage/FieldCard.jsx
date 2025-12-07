@@ -62,8 +62,10 @@ function FieldCard({ field, onClick }) {
         </div>
 
         {attributes.map((attr) => (
-          <div key={attr.id || attr.label}>
-            {attr.label}: {attr.value || "—"}
+          <div key={attr.id || attr.label} className="info-row">
+            <span className="label">{attr.label}:</span>
+
+            <span className="value">{attr.value || "—"}</span>
           </div>
         ))}
       </div>

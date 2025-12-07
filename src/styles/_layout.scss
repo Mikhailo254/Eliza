@@ -5,8 +5,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: $app-bg;
-  color: $text-main;
+  background: $color-body-bg;
+  color: $color-text-primary;
 
   &__body {
     flex: 1;

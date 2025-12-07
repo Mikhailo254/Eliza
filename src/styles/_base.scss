@@ -1,3 +1,4 @@
+// src/styles/_base.scss
 @use "./variables" as *;
 
 h1,
@@ -58,7 +59,7 @@ textarea {
 
 /* textarea */
 textarea {
-  resize: vertical; // або none, якщо хочеш
+  resize: vertical;
 }
 
 /* images */
@@ -89,8 +90,9 @@ body,
   height: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #181818;
-  overflow: hidden;
+  background-color: $color-body-bg;
+  color: $color-text-primary;
+  overflow: hidden; // скрол тільки в main-area
 }
 
 *,

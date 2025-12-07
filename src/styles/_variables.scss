@@ -1,23 +1,118 @@
 // src/styles/_variables.scss
 
-// Основні кольори додатку
-$app-bg: #111827;
-$panel-bg: #4d4e50;
-$sidebar-bg: #646b8d;
-$sidebar-bottom-bg: #0f172a;
-$header-footer-bg: #404d87;
+// ===== БАЗОВА ПАЛІТРА (залишаємо на випадок, якщо десь ще потрібна) =====
 
-$border-main: #1f2937;
+$gray-50: #f9fafb;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-400: #9ca3af;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+$gray-900: #111827;
 
-$text-main: #e5e7eb;
-$text-muted: #dddddd;
+// ===== ТВОЯ ПАЛІТРА З КАРТИНКИ =====
+// #BFB6A4 — «смола»
+// #A6A5A4 — «хмарний день»
+// #8C8C8C — «сірий»
+// #595959 — «скорпіон»
+// #404040 — «тундра»
 
-// Top-nav
-$tabs-bg: rgb(167, 119, 119);
-$tabs-border: rgb(96, 69, 69);
-$tabs-hover-bg: rgb(193, 102, 108);
+$theme-1: #bfb6a4;
+$theme-2: #a6a5a4;
+$theme-3: #8c8c8c;
+$theme-4: #595959;
+$theme-5: #404040;
 
-// Розміри
-$bar-height: 70px;
-$top-nav-height: 48px;
-$sidebar-width: 260px;
+// ===== БАЗОВІ КОЛЬОРИ ДОДАТКА (НЕЙТРАЛЬНО-ТЕМНА ТЕМА) =====
+
+// фон «за всім» (чуть темніше, ніж було)
+$color-body-bg: #222222;
+
+// основна робоча область / фон layout’у
+$color-panel-bg: #333333;
+
+// header / footer / sidebar фон
+$color-header-footer-bg: $color-panel-bg;
+$color-sidebar-bg: $color-panel-bg;
+$color-sidebar-bottom-bg: #2a2a2a;
+
+// бордери / розділювачі / таби
+$color-border-subtle: rgba($theme-3, 0.32);
+$color-border-strong: rgba($theme-3, 0.7);
+
+$color-tabs-bg: $color-panel-bg;
+$color-tabs-border: rgba($theme-3, 0.45);
+$color-tabs-hover-bg: #3b3b3b;
+$color-tabs-active-bg: #404040;
+
+// текст
+$color-text-primary: #f5f5f5; // майже білий
+$color-text-secondary: #e0e0e0; // трохи темніший
+$color-text-muted: $theme-2; // #A6A5A4
+$color-text-soft: $theme-1; // теплий бежево-сірий
+
+// ===== РІВНІ ПОВЕРХНІ (ЩОБ НЕ БУЛО «ОДНОТОННО») =====
+
+// базові поверхні (панелі, блоки)
+$color-surface-base: $theme-5; // #404040
+
+// підняті поверхні (картки, модалки, важливі блоки)
+$color-surface-raised: #4a4a4a;
+
+// hover / active для карток / кнопок
+$color-surface-hover: #525252;
+
+// ===== СЕМАНТИЧНІ КОЛЬОРИ ДЛЯ ВСІЄЇ АППКИ =====
+
+// поверхні (сумісність із існуючим кодом)
+$color-main-surface: $color-surface-base;
+$color-surface-alt: $color-surface-raised;
+
+// Картки (Поля + Техніка)
+$color-card-bg: $color-surface-base;
+$color-card-bg-hover: $color-surface-hover;
+$color-card-bg-strong: #383838;
+$color-card-bg-soft: #474747;
+
+// Модалки
+$color-modal-bg: #3a3a3a;
+
+// Бордери
+$color-border-soft: rgba($theme-2, 0.7);
+
+// Акценти (теплий, але не кричущий)
+$color-accent: $theme-1; // #BFB6A4
+$color-accent-hover: #d3c8b5; // трохи світліший вручну
+$color-accent-soft: rgba($theme-1, 0.22);
+
+// Успіх / помилка
+$color-danger: #dc2626;
+$color-danger-hover: #ef4444;
+$color-danger-soft: rgba(220, 38, 38, 0.18);
+$color-success: #22c55e;
+
+$color-outline: $color-accent;
+
+// ===== РАДІУСИ, ТІНІ, ПРОЧЕ =====
+
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-pill: 999px;
+
+$shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.4);
+$shadow-card: 0 10px 24px rgba(0, 0, 0, 0.65);
+$shadow-card-strong: 0 16px 40px rgba(0, 0, 0, 0.8);
+$shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.9);
+
+/* ===== РОЗМІРИ ЛЕЙАУТУ ===== */
+
+$layout-bar-height: 70px; // висота header/footer
+$layout-top-nav-height: 40px; // висота верхніх табів
+$layout-sidebar-width: 260px; // ширина сайдбару
+
+$layout-page-padding-x: 24px;
+$layout-page-padding-y: 16px;

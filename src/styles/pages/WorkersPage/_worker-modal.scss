@@ -1,0 +1,187 @@
+// src/styles/pages/WorkersPage/_worker-modal.scss
+@use "../../variables" as *;
+.modal--workers {
+  max-width: 880px;
+  width: 100%;
+}
+
+.modal__form--workers {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.modal__section-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__section--workers-main {
+  padding: 16px;
+}
+
+/* Новий лейаут верхнього блоку */
+
+.modal__workers-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: stretch; // всі елементи в рядку мають однакову висоту
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal__workers-main-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.modal__pair--section--workers-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  font-size: 13px;
+
+  input,
+  select {
+    width: 68.3%;
+  }
+}
+
+.modal__pair--section--time-block input {
+  width: 50%;
+}
+
+.modal__workers-photo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  align-self: stretch;
+
+  &-frame {
+    height: 100%;
+    max-height: 120px;
+    min-height: 100px;
+    aspect-ratio: 1 / 1;
+    width: auto;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .modal__workers-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+/* Рамка для фото */
+
+.modal__workers-photo-placeholder {
+  font-size: 12px;
+  color: $color-text-soft;
+}
+
+/* Кнопки під фото */
+
+.modal__workers-photo-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.modal__btn-upload {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border-subtle;
+  background: $color-main-surface;
+  cursor: pointer;
+}
+
+.modal__btn-remove-photo {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: $radius-sm;
+  border: 1px solid $color-danger-soft;
+  background: rgba($color-danger, 0.1);
+  color: $color-danger-soft;
+  cursor: pointer;
+}
+
+/* Навички */
+
+.modal__skills-block {
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+.modal__skills-title {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: $color-text-secondary;
+}
+
+.modal__skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modal__skill-chip {
+  padding: 0;
+}
+
+.modal__skill-chip-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-pill;
+  border: 1px solid $color-border-subtle;
+  padding: 3px 10px;
+  font-size: 12px;
+  color: $color-text-secondary;
+  background: rgba(255, 255, 255, 0.01);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+
+  &--active {
+    background: $color-accent-soft;
+    border-color: $color-accent;
+    color: $color-text-primary;
+  }
+}
+
+.modal__label.modal__label--checkbox--section--workers-main {
+  display: inline-flex; // або flex
+  flex-direction: row; // ← головне
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  width: auto;
+
+  span {
+    display: inline-block;
+  }
+  input {
+    display: inline-block;
+  }
+}

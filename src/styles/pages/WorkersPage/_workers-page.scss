@@ -1,17 +1,16 @@
-// src/styles/pages/MachinesPage/_machines-page.scss
+// src/styles/pages/WorkersPage/_workers-page.scss
 @use "../../variables" as *;
 
-.machines-page {
+.workers-page {
+  color: $color-text-primary;
   display: flex;
   flex-direction: column;
   height: 100%;
-  color: $color-text-primary;
 
   &__title {
-    margin: 0 0 16px;
-    font-size: 20px;
-    text-align: left;
-    flex: 0 0 auto;
+    font-size: 1.4rem;
+    margin: 0 0 12px 0;
+    font-weight: 600;
   }
 
   &__grid {

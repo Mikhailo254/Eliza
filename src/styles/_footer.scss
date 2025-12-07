@@ -1,18 +1,19 @@
-// src/styles/_footer.scss
 @use "./variables" as *;
 
 /* FOOTER */
 
 .app-footer {
-  flex: 0 0 $bar-height;
-  height: $bar-height;
+  flex: 0 0 $layout-bar-height;
+  height: $layout-bar-height;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 $layout-page-padding-x;
 
-  border-top: 1px solid $border-main;
-  background: $header-footer-bg;
+  border-top: 1px solid $color-border-subtle;
+  background: $color-header-footer-bg;
+  box-shadow: 0 -1px 0 rgba(15, 23, 42, 0.9);
   font-size: 13px;
+  color: $color-text-muted;
 }

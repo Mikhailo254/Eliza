@@ -1,4 +1,4 @@
-// src/components/layout/MainArea/FieldsPage/FieldsPage.jsx
+// src/components/pages/FieldsPage/FieldsPage.jsx
 import { useState } from "react";
 import FieldCard from "./FieldCard";
 import FieldModal from "./FieldModal";
@@ -8,9 +8,11 @@ function FieldsPage() {
   const [fields, setFields] = useState(initialFields);
   const [selectedField, setSelectedField] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateMode, setIsCreateMode] = useState(false);
 
-  const openModalWithField = (field) => {
+  const openModalWithField = (field, { createMode = false } = {}) => {
     setSelectedField(field);
+    setIsCreateMode(createMode);
     setIsModalOpen(true);
   };
 
@@ -19,17 +21,18 @@ function FieldsPage() {
       ...EMPTY_FIELD,
       id: Date.now(), // тимчасовий id, потім заміниш на id з БД
     };
-    openModalWithField(newField);
+    openModalWithField(newField, { createMode: true });
   };
 
   const handleEditField = (field) => {
-    openModalWithField(field);
+    openModalWithField(field, { createMode: false });
   };
 
   const handleDeleteField = (id) => {
     setFields((prev) => prev.filter((f) => f.id !== id));
     setIsModalOpen(false);
     setSelectedField(null);
+    setIsCreateMode(false);
   };
 
   const handleSaveField = (fieldData) => {
@@ -42,13 +45,14 @@ function FieldsPage() {
     });
     setIsModalOpen(false);
     setSelectedField(null);
+    setIsCreateMode(false);
   };
 
   return (
     <div className="fields-page">
-      <h2>Поля господарства</h2>
+      <h2 className="fields-page__title">Поля господарства</h2>
 
-      <div className="fields-grid">
+      <div className="fields-page__grid">
         {fields.map((field) => (
           <FieldCard
             key={field.id}
@@ -57,7 +61,11 @@ function FieldsPage() {
           />
         ))}
 
-        <button className="field-card field-card--add" onClick={handleAddField}>
+        <button
+          type="button"
+          className="field-card field-card--add"
+          onClick={handleAddField}
+        >
           +
         </button>
       </div>
@@ -70,7 +78,9 @@ function FieldsPage() {
           onClose={() => {
             setIsModalOpen(false);
             setSelectedField(null);
+            setIsCreateMode(false);
           }}
+          initialEditing={isCreateMode}
         />
       )}
     </div>

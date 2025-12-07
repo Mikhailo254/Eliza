@@ -1,15 +1,19 @@
-// src/styles/_main-area.scss
 @use "./variables" as *;
 
 /* ОСНОВНА РОБОЧА ОБЛАСТЬ */
 
 .main-area {
   flex: 1;
-  padding: 16px 24px;
+  padding: $layout-page-padding-y $layout-page-padding-x;
   min-height: 0;
   width: 100%;
 
-  background: $panel-bg;
+  background: $color-panel-bg;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.133),
+    transparent
+  );
 
   // Скрол тільки по вертикалі, горизонтальний ховаємо
   overflow-y: auto;

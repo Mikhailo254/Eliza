@@ -1,6 +1,7 @@
 // src/components/layout/MainArea.jsx
-import FieldsPage from "./pages/FieldsPage/FieldsPage";
-import MachinesPage from "./pages/MachinesPage/MachinesPage";
+import FieldsPage from "../pages/FieldsPage/FieldsPage";
+import MachinesPage from "../pages/MachinesPage/MachinesPage";
+import WorkersPage from "../pages/WorkersPage/WorkersPage";
 
 function Placeholder({ text }) {
   return <div>{text}</div>;
@@ -11,7 +12,7 @@ const TAB_COMPONENTS = {
 
   cultures: <Placeholder text='Тут буде підсистема "Культури".' />,
   machines: <MachinesPage />,
-  workers: <Placeholder text='Тут буде підсистема "Робітники".' />,
+  workers: <WorkersPage />,
   resources: <Placeholder text='Тут буде підсистема "Ресурси".' />,
   weather: <Placeholder text='Тут буде модуль "Погодні сценарії".' />,
   calendar: <Placeholder text="Тут буде календар робіт." />,

@@ -1,23 +1,28 @@
-// src/styles/_header.scss
 @use "./variables" as *;
 
 /* HEADER */
 
 .app-header {
-  flex: 0 0 $bar-height;
-  height: $bar-height;
+  flex: 0 0 $layout-bar-height;
+  height: $layout-bar-height;
   width: 100%;
-  padding: 0 24px;
+  padding: 0 $layout-page-padding-x;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  border-bottom: 1px solid $border-main;
-  background: $header-footer-bg;
+  border-bottom: 1px solid $color-border-subtle;
+  background: $color-header-footer-bg;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02),
+    transparent
+  );
 
   h1 {
     font-size: 18px;
     margin: 0;
+    letter-spacing: 0.03em;
   }
 }

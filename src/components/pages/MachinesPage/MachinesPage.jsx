@@ -1,9 +1,10 @@
+// src/components/pages/MachinesPage/MachinesPage.jsx
 import { useState } from "react";
 
 import MachineModal from "./MachineModal";
 import MachineCard from "./MachineCard";
 
-/** ==== Початкові дані (можеш змінити/очистити) ==== */
+/** ==== Початкові дані (поки що мок, потім можна винести в окремий файл / БД) ==== */
 const initialMachines = [
   {
     id: 1,
@@ -82,9 +83,9 @@ function MachinesPage() {
 
   return (
     <div className="machines-page">
-      <h2>Техніка господарства</h2>
+      <h2 className="machines-page__title">Техніка господарства</h2>
 
-      <div className="machines-grid">
+      <div className="machines-page__grid">
         {machines.map((machine) => (
           <button
             key={machine.id}

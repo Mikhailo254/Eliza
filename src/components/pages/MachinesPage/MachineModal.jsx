@@ -1,4 +1,4 @@
-// src/components/layout/MainArea/MachinesPage/MachineModal.jsx
+// src/components/pages/MachinesPage/MachineModal.jsx
 import { useMemo, useState } from "react";
 import {
   MACHINE_TYPES,
@@ -25,19 +25,16 @@ function MachineModal({
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(machine.photo || "");
 
-  // Файл фото (для можливого майбутнього завантаження на бекенд)
-  photoFile;
-  // Те, що реально показуємо в UI (dataURL / objectURL / URL з БД)
-
+  // Режим: перегляд / редагування
   const [isEditing, setIsEditing] = useState(initialEditing);
 
+  // Обраний тип та режим роботи з операціями
   const machineType = useMemo(() => findMachineType(form.type), [form.type]);
   const operationsMode = machineType?.operationsMode || "none";
   const availableOperationIds = MACHINE_OPERATIONS[form.type] || [];
   const availableOperations = OPERATIONS.filter((op) =>
     availableOperationIds.includes(op.id)
   );
-
   const typeLabel = MACHINE_TYPES.find((t) => t.id === form.type)?.label || "";
 
   /** ====== Зміна простих полів (name, type, тощо) ====== */
@@ -243,7 +240,7 @@ function MachineModal({
     onSave({
       ...form,
       photo: photoPreview,
-      _photoFile: photoFile, // 👈 на майбутнє для БД
+      _photoFile: photoFile, // на майбутнє для БД
     });
   };
 
@@ -396,36 +393,34 @@ function MachineModal({
                     key={attr.id || index}
                     className="modal__row modal__row--attr"
                   >
-                    <>
-                      {/* Ліва половина (50%) — назва атрибута */}
-                      <input
-                        className="modal__input modal__input--attr-name"
-                        value={attr.label || ""}
-                        onChange={(e) =>
-                          handleAttrChange(index, "label", e.target.value)
-                        }
-                        placeholder="Назва атрибута"
-                      />
+                    {/* Ліва половина — назва атрибута */}
+                    <input
+                      className="modal__input modal__input--attr-name"
+                      value={attr.label || ""}
+                      onChange={(e) =>
+                        handleAttrChange(index, "label", e.target.value)
+                      }
+                      placeholder="Назва атрибута"
+                    />
 
-                      {/* Права половина (50%) — значення + кнопка видалення */}
-                      <div className="modal__attr-edit-right">
-                        <input
-                          className="modal__input modal__input--attr-value"
-                          value={attr.value || ""}
-                          onChange={(e) =>
-                            handleAttrChange(index, "value", e.target.value)
-                          }
-                          placeholder="Значення"
-                        />
-                        <button
-                          type="button"
-                          className="modal__btn-remove"
-                          onClick={() => handleRemoveAttribute(index)}
-                        >
-                          ×
-                        </button>
-                      </div>
-                    </>
+                    {/* Права половина — значення + кнопка видалення */}
+                    <div className="modal__attr-edit-right">
+                      <input
+                        className="modal__input modal__input--attr-value"
+                        value={attr.value || ""}
+                        onChange={(e) =>
+                          handleAttrChange(index, "value", e.target.value)
+                        }
+                        placeholder="Значення"
+                      />
+                      <button
+                        type="button"
+                        className="modal__btn-remove"
+                        onClick={() => handleRemoveAttribute(index)}
+                      >
+                        ×
+                      </button>
+                    </div>
                   </div>
                 ))
               ) : (
