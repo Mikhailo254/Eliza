@@ -2,6 +2,7 @@
 import FieldsPage from "../pages/FieldsPage/FieldsPage";
 import MachinesPage from "../pages/MachinesPage/MachinesPage";
 import WorkersPage from "../pages/WorkersPage/WorkersPage";
+import CropsPage from "../pages/CropsPage/CropsPage";
 
 function Placeholder({ text }) {
   return <div>{text}</div>;
@@ -10,7 +11,7 @@ function Placeholder({ text }) {
 const TAB_COMPONENTS = {
   fields: <FieldsPage />,
 
-  cultures: <Placeholder text='Тут буде підсистема "Культури".' />,
+  cultures: <CropsPage />,
   machines: <MachinesPage />,
   workers: <WorkersPage />,
   resources: <Placeholder text='Тут буде підсистема "Ресурси".' />,
