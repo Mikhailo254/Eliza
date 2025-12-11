@@ -92,8 +92,6 @@
   }
 
   &__value {
-    display: flex;
-    flex-wrap: wrap;
     color: $color-text-primary;
     max-width: 150px;
     text-align: right;

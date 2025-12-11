@@ -1,0 +1,373 @@
+// src/styles/pages/ResourcesPage/_resources-page.scss
+@use "../../variables" as *;
+
+.resources-page {
+  display: flex;
+  flex-direction: column;
+
+  color: $color-text-primary;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  &__edit-toggle {
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-strong;
+    background-color: $color-main-surface;
+    color: $color-text-primary;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease,
+      box-shadow 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: $color-main-surface;
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px $color-border-soft;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+}
+
+/* ===== УНІВЕРСАЛЬНІ СЕКЦІЇ ===== */
+
+.resources-section {
+  margin-bottom: 16px;
+  padding: 10px 12px 12px;
+  border-radius: $radius-md;
+  background: $color-card-bg;
+  border: 1px solid $color-border-subtle;
+  box-shadow: $shadow-soft;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    color: $color-text-primary;
+  }
+
+  &__btn-main {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-strong;
+    background-color: $color-main-surface;
+    color: $color-text-primary;
+    cursor: pointer;
+    min-width: 120px;
+    text-align: center;
+    transition: background-color 0.15s ease, border-color 0.15s ease,
+      transform 0.1s ease;
+
+    &:hover {
+      background-color: $color-main-surface;
+      border-color: $color-accent;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &__body {
+    font-size: 0.85rem;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* ===== ТАБЛИЦІ ===== */
+
+.resources-table-wrapper {
+  max-height: 360px;
+  overflow: auto;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border-subtle;
+  background-color: $color-main-surface;
+}
+
+.resources-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: $color-card-bg-strong;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.01);
+  }
+
+  &__th {
+    padding: 6px 8px;
+    text-align: left;
+    border-bottom: 1px solid $color-border-subtle;
+    font-weight: 500;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  &__th--sortable {
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  .resources-table__th-sort-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &--materials {
+    table-layout: fixed; // щоб ширини бралися з colgroup
+
+    .resources-col-name {
+      width: 20%;
+    }
+
+    .resources-col-availability {
+      width: 30%;
+    }
+    .resources-col-unit {
+      width: 15%;
+    }
+
+    .resources-col-price {
+      width: 15%;
+    }
+
+    .resources-col-note {
+      width: 40%;
+    }
+
+    .resources-col-actions {
+      width: 40px;
+    }
+
+    // щоб попередні "short" стилі не ламали цю сітку
+    .resources-table__cell--short {
+      width: auto;
+      max-width: none;
+    }
+  }
+
+  &__th--actions {
+    text-align: center;
+  }
+
+  &__cell {
+    padding: 4px 8px;
+    border-bottom: 1px solid rgba($color-border-subtle, 0.7);
+    color: $color-text-secondary;
+    vertical-align: middle;
+
+    &--numeric {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    &--short {
+      width: 80px;
+      max-width: 90px;
+      white-space: nowrap;
+    }
+
+    &--actions {
+      text-align: center;
+      width: 40px;
+    }
+
+    &--empty {
+      text-align: center;
+      color: $color-text-muted;
+      font-style: italic;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: $color-main-surface;
+    border: 1px solid $color-border-strong;
+    border-radius: $radius-sm;
+    padding: 3px 6px;
+    color: $color-text-primary;
+    font-size: 0.8rem;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px $color-border-soft;
+    }
+  }
+
+  &__btn-remove {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-sm;
+    border: none;
+    background-color: $color-danger;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    &:hover {
+      background-color: $color-danger-hover;
+    }
+  }
+
+  &__sort-icon {
+    font-size: 0.65rem;
+    opacity: 0.5;
+
+    &--active {
+      opacity: 1;
+      color: $color-accent;
+    }
+  }
+
+  &__hint {
+    margin: 4px 6px 6px;
+    font-size: 0.75rem;
+    color: $color-text-muted;
+  }
+
+  th,
+  td {
+    text-align: left;
+  }
+
+  // якщо десь були спец-класи для правого вирівнювання — вимикаємо
+  &__cell--numeric {
+    text-align: left;
+  }
+}
+
+/* ===== МАТЕРІАЛЬНІ РЕСУРСИ: ЛЕЙАУТ З ЛІВОЮ КОЛОНКОЮ ===== */
+
+.resources-materials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__block {
+    display: flex;
+    border-radius: $radius-md;
+    overflow: hidden;
+    border: 1px solid $color-border-subtle;
+    background-color: $color-main-surface;
+  }
+
+  &__label-column {
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
+    border-right: 1px solid $color-border-subtle;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  &__label-main {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $color-text-primary;
+  }
+
+  &__add-btn {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-strong;
+    background-color: $color-panel-bg;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      background-color: $color-panel-bg;
+      border-color: $color-accent;
+      color: #ffffff;
+    }
+  }
+
+  &__table-column {
+    flex: 1 1 auto;
+    padding: 6px 8px;
+    overflow: auto;
+  }
+}
+
+/* ===== ЗАПИСНИК ===== */
+
+.resources-section--notebook {
+  .resources-section__body {
+    padding-top: 4px;
+  }
+}
+
+.resources-notebook {
+  width: 100%;
+  min-height: 80px;
+  max-height: 200px;
+  resize: vertical;
+  background-color: $color-main-surface;
+  border: 1px solid $color-border-strong;
+  border-radius: $radius-sm;
+  padding: 6px 8px;
+  color: $color-text-primary;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $color-accent;
+    box-shadow: 0 0 0 1px $color-border-soft;
+  }
+}

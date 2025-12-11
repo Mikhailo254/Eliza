@@ -3,6 +3,7 @@ import FieldsPage from "../pages/FieldsPage/FieldsPage";
 import MachinesPage from "../pages/MachinesPage/MachinesPage";
 import WorkersPage from "../pages/WorkersPage/WorkersPage";
 import CropsPage from "../pages/CropsPage/CropsPage";
+import ResourcesPage from "../pages/ResourcesPage/ResourcesPage";
 
 function Placeholder({ text }) {
   return <div>{text}</div>;
@@ -14,7 +15,7 @@ const TAB_COMPONENTS = {
   cultures: <CropsPage />,
   machines: <MachinesPage />,
   workers: <WorkersPage />,
-  resources: <Placeholder text='Тут буде підсистема "Ресурси".' />,
+  resources: <ResourcesPage />,
   weather: <Placeholder text='Тут буде модуль "Погодні сценарії".' />,
   calendar: <Placeholder text="Тут буде календар робіт." />,
   profile: <Placeholder text='Тут буде "Особистий кабінет".' />,
