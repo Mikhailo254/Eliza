@@ -29,3 +29,10 @@
 @use "./pages/CropsPage/crop-modal";
 
 @use "./pages/ResourcesPage/resources-page";
+
+@use "./pages/WeatherScenariosPage/weather-scenarios-page";
+
+@use "./pages/CalendarPage/calendar-page";
+@use "./pages/CalendarPage/calendar-grid";
+@use "./pages/CalendarPage/day-panel";
+@use "./pages/CalendarPage/calendar-modal";

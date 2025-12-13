@@ -1,0 +1,428 @@
+// src/styles/pages/CalendarPage/calendar-page.scss
+@use "../../variables" as *;
+
+.calendar-page {
+  color: $color-text-primary;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+
+  /* ======================
+     TOP BAR
+  ====================== */
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  &__title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 1.4rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    color: $color-text-soft;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  &__segmented {
+    display: inline-flex;
+    border-radius: $radius-pill;
+    border: 1px solid $color-border-subtle;
+    overflow: hidden;
+    background: $color-main-surface;
+  }
+
+  &__seg-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: 0;
+    background: transparent;
+    color: $color-text-secondary;
+    cursor: pointer;
+
+    &--active {
+      background: $color-accent-soft;
+      color: $color-text-primary;
+    }
+  }
+
+  &__primary-btn {
+    padding: 8px 12px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-card-bg;
+    color: $color-text-primary;
+    cursor: pointer;
+    box-shadow: $shadow-card;
+    transition: transform 0.12s ease, box-shadow 0.12s ease,
+      background 0.12s ease;
+
+    &:hover {
+      background: $color-card-bg-hover;
+      box-shadow: $shadow-card-strong;
+      transform: translateY(-1px);
+    }
+  }
+
+  /* ======================
+     FILTERS (старий JSX: з label + select + кнопка reset)
+  ====================== */
+  &__filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr)) auto;
+    gap: 10px;
+    align-items: end;
+    margin-bottom: 14px;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: repeat(2, minmax(160px, 1fr)) auto;
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  &__filter-label {
+    font-size: 12px;
+    color: $color-text-soft;
+  }
+
+  &__select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+    color: $color-text-primary;
+    min-width: 0;
+  }
+
+  /* ✅ КНОПКА "Скинути фільтри" */
+  &__ghost-btn {
+    height: 36px;
+    padding: 8px 12px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: transparent;
+    color: $color-text-secondary;
+    cursor: pointer;
+    white-space: nowrap;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    transition: transform 0.12s ease, box-shadow 0.12s ease,
+      background 0.12s ease, color 0.12s ease;
+
+    &:hover {
+      background: $color-main-surface;
+      color: $color-text-primary;
+      box-shadow: $shadow-card;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
+  }
+
+  /* ======================
+     MAIN LAYOUT
+     Row 1: calendar + daypanel
+     Row 2: economics full width
+     (це під твій ОНОВЛЕНИЙ JSX, де economics винесений з calendar)
+  ====================== */
+  &__layout {
+    display: grid;
+    grid-template-columns: minmax(520px, 1fr) 420px;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "calendar day"
+      "economics economics";
+    gap: 16px;
+
+    align-items: stretch;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "calendar"
+        "day"
+        "economics";
+    }
+  }
+
+  /* ======================
+     CALENDAR AREA (старий JSX: .calendar-page__calendar)
+  ====================== */
+  &__calendar {
+    grid-area: calendar;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  /* ======================
+     MONTH BAR
+  ====================== */
+  &__monthbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex: 0 0 auto;
+  }
+
+  &__month-btn {
+    padding: 6px 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+    color: $color-text-primary;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-card-bg-hover;
+    }
+  }
+
+  &__today-btn {
+    padding: 6px 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-card-bg;
+    color: $color-text-primary;
+    cursor: pointer;
+    box-shadow: $shadow-card;
+
+    &:hover {
+      background: $color-card-bg-hover;
+      box-shadow: $shadow-card-strong;
+    }
+  }
+
+  &__month-title {
+    flex: 1 1 auto;
+    text-align: center;
+    font-weight: 600;
+    color: $color-text-primary;
+    text-transform: capitalize;
+    min-width: 0;
+  }
+
+  /* ======================
+     DAY PANEL
+  ====================== */
+  &__daypanel {
+    grid-area: day;
+    min-width: 0;
+
+    height: 100%; // ⬅️ займає всю висоту рядка
+    display: flex;
+    flex-direction: column;
+
+    overflow: visible; // як ти і хотів
+  }
+
+  /* ======================
+     ECONOMICS PANEL (FULL WIDTH)
+     (тепер він самостійний блок у grid-area: economics)
+  ====================== */
+  &__economics {
+    grid-area: economics;
+
+    border: 1px solid $color-border-subtle;
+    background: $color-card-bg;
+    box-shadow: $shadow-card;
+    border-radius: $radius-md;
+    padding: 12px;
+  }
+
+  &__econ-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  &__econ-title {
+    font-weight: 600;
+    color: $color-text-primary;
+    text-transform: capitalize;
+  }
+
+  /* старий JSX: econ-controls + econ-label */
+  &__econ-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 260px;
+    flex: 0 1 360px;
+
+    @media (max-width: 700px) {
+      min-width: 100%;
+      flex: 1 1 100%;
+    }
+  }
+
+  &__econ-label {
+    font-size: 12px;
+    color: $color-text-soft;
+  }
+
+  &__econ-toggle {
+    height: 36px;
+    padding: 8px 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+    color: $color-text-primary;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: $shadow-card;
+    transition: transform 0.12s ease, box-shadow 0.12s ease,
+      background 0.12s ease;
+
+    &:hover {
+      background: $color-card-bg-hover;
+      box-shadow: $shadow-card-strong;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+
+  &__econ-toggle-icon {
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  &__econ-toggle-icon--collapsed {
+    transform: rotate(-90deg);
+  }
+
+  /* body collapse (у тебе в JSX є клас --collapsed) */
+  &__econ-body {
+    transition: max-height 0.2s ease, opacity 0.2s ease;
+  }
+
+  &__econ-body--collapsed {
+    display: none;
+  }
+
+  &__econ-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: 10px;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+    }
+
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__econ-card {
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+    border-radius: $radius-md;
+    padding: 10px;
+  }
+
+  &__econ-k {
+    font-size: 12px;
+    color: $color-text-soft;
+    margin-bottom: 6px;
+  }
+
+  &__econ-v {
+    font-weight: 700;
+    font-size: 14px;
+    color: $color-text-primary;
+  }
+
+  &__econ-s {
+    margin-top: 4px;
+    font-size: 12px;
+    color: $color-text-soft;
+  }
+
+  &__econ-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid $color-border-subtle;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 8px 12px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__econ-detail {
+    font-size: 12px;
+    color: $color-text-secondary;
+    display: flex;
+    gap: 6px;
+
+    span {
+      color: $color-text-soft;
+    }
+  }
+
+  &__econ-warn {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+    color: $color-text-secondary;
+    font-size: 12px;
+  }
+}

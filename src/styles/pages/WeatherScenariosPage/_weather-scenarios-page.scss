@@ -1,0 +1,457 @@
+// src/styles/pages/WeatherScenariosPage/_weather-scenarios-page.scss
+@use "../../variables" as *;
+
+.weather-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: $color-text-primary;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  /* Кнопки керування шириною лейауту */
+  &__layout-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__btn-layout {
+    font-size: 0.85rem;
+    padding: 3px 8px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-strong;
+    background-color: $color-main-surface;
+    color: $color-text-primary;
+    cursor: pointer;
+    min-width: 32px;
+    text-align: center;
+    transition: background-color 0.15s ease, border-color 0.15s ease,
+      box-shadow 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: $color-main-surface;
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px $color-border-soft;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    &--active {
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px $color-border-soft;
+    }
+  }
+
+  &__layout {
+    display: grid;
+    gap: 16px;
+    flex: 1 1 auto;
+    min-height: 0; // для коректного overflow всередині
+  }
+
+  /* Режими ширини */
+  &__layout--compact {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+
+  &__layout--default {
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  }
+
+  &__layout--wide {
+    grid-template-columns: minmax(360px, 520px) minmax(260px, 1fr);
+  }
+
+  &__list-section,
+  &__details-section {
+    background: $color-card-bg;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    box-shadow: $shadow-soft;
+    padding: 10px 12px 12px;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__list-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__list-title {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  &__prob-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &__prob-summary {
+    font-size: 0.8rem;
+    color: $color-text-secondary;
+  }
+
+  &__prob-value {
+    font-weight: 600;
+
+    &--ok {
+      color: $color-success;
+    }
+
+    &--warn {
+      color: $color-danger-soft;
+    }
+  }
+
+  &__btn-normalize {
+    font-size: 0.8rem;
+    padding: 3px 10px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-strong;
+    background-color: $color-main-surface;
+    color: $color-text-primary;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease,
+      box-shadow 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: $color-main-surface;
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px $color-border-soft;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+  }
+
+  &__list-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden; // щоб при вузькому списку не було горизонтального скролу
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+  }
+
+  &__details-section {
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+}
+
+/* ===== ТАБЛИЦЯ СПИСКУ СЦЕНАРІЇВ ===== */
+
+.weather-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: $color-card-bg-strong;
+  }
+
+  th,
+  td {
+    padding: 6px 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba($color-border-subtle, 0.7);
+    white-space: nowrap;
+  }
+
+  th {
+    font-weight: 500;
+    color: $color-text-secondary;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: rgba($color-text-primary, 0.02);
+  }
+
+  &__row {
+    cursor: pointer;
+    transition: background 0.12s ease;
+
+    &:hover {
+      background: rgba($color-text-primary, 0.04);
+    }
+
+    &--selected {
+      background: rgba($color-accent, 0.15);
+
+      &:hover {
+        background: rgba($color-accent, 0.18);
+      }
+    }
+  }
+
+  &__cell-prob {
+    text-align: right;
+  }
+
+  &__cell-baseline {
+    text-align: center;
+  }
+
+  &__cell-empty {
+    text-align: center;
+    padding: 12px;
+    color: $color-text-muted;
+    font-style: italic;
+  }
+
+  &--crops {
+    font-size: 0.8rem;
+
+    th,
+    td {
+      white-space: normal;
+    }
+  }
+
+  &__cell-numeric {
+    text-align: right;
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-strong;
+    background: $color-body-bg;
+    color: $color-text-primary;
+    padding: 3px 6px;
+    font-size: 0.8rem;
+
+    &:focus {
+      outline: none;
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px $color-border-soft;
+    }
+  }
+}
+
+/* ===== ПРАВА ПАНЕЛЬ: ДЕТАЛІ ===== */
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  overflow: auto;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid $color-border-subtle;
+  }
+
+  &__name {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    font-size: 0.8rem;
+    color: $color-text-muted;
+  }
+
+  &__top-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  &__edit-toggle,
+  &__save {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-strong;
+    background: $color-main-surface;
+    color: $color-text-secondary;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease, border-color 0.15s ease,
+      box-shadow 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      background: $color-main-surface;
+      border-color: $color-accent;
+      box-shadow: 0 0 0 1px $color-border-soft;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  &__save {
+    border-color: $color-accent;
+    color: $color-text-primary;
+    background: $color-main-surface;
+  }
+
+  &__prob-warning {
+    font-size: 0.8rem;
+    color: $color-danger;
+    background: $color-danger-soft;
+    border-radius: $radius-sm;
+    padding: 6px 8px;
+  }
+
+  &__section {
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__section-title {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $color-text-primary;
+  }
+
+  &__grid {
+    width: 100%;
+    display: grid;
+    gap: 6px 16px;
+  }
+
+  &__grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @media (max-width: 960px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+
+    .modal__label {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .modal__input,
+    .modal__textarea,
+    .modal__value {
+      flex: 1 1 auto;
+    }
+
+    &--full {
+      grid-column: 1 / -1;
+      align-items: flex-start;
+
+      .modal__label {
+        margin-top: 4px;
+      }
+    }
+  }
+
+  &__prob-input {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .modal__input {
+      max-width: 80px;
+    }
+  }
+
+  &__prob-suffix {
+    font-size: 0.8rem;
+    color: $color-text-muted;
+    white-space: nowrap;
+  }
+
+  &__table-wrapper {
+    border-radius: $radius-sm;
+    border: 1px solid $color-border-subtle;
+    overflow: auto;
+    max-height: 260px;
+  }
+
+  &__hint {
+    margin: 0 0 4px 0;
+    font-size: 0.8rem;
+    color: $color-text-muted;
+  }
+
+  &__text {
+    white-space: pre-wrap;
+    font-size: 0.85rem;
+  }
+
+  &__placeholder {
+    font-size: 0.9rem;
+    color: $color-text-muted;
+    margin: auto;
+    text-align: center;
+  }
+}

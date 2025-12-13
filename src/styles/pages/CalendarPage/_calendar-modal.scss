@@ -1,0 +1,26 @@
+@use "../../variables" as *;
+
+.modal--calendar {
+  max-width: 920px;
+  width: 100%;
+}
+
+.modal__form--calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.modal__workers-pick {
+  margin-top: 12px;
+
+  &-title {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: $color-text-secondary;
+  }
+}

@@ -1,0 +1,164 @@
+@use "../../variables" as *;
+
+.day-panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  border-radius: $radius-md;
+  border: 1px solid $color-border-subtle;
+  background: $color-card-bg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+
+  /* ======================
+     TOP BAR
+  ====================== */
+  &__top {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    border-bottom: 1px solid $color-border-subtle;
+    background: $color-main-surface;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 13px;
+    color: $color-text-primary;
+    text-transform: capitalize;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__mode {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: $radius-pill;
+    border: 1px solid $color-border-subtle;
+    color: $color-text-secondary;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  &__add {
+    padding: 7px 10px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border-subtle;
+    background: $color-card-bg;
+    color: $color-text-primary;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-card-bg-hover;
+      border-color: $color-border-strong;
+    }
+  }
+
+  /* ======================
+     ECONOMICS (DAY)
+  ====================== */
+  &__econ {
+    padding: 10px 12px;
+    border-bottom: 1px solid $color-border-subtle;
+    background: rgba($color-accent-soft, 0.06);
+    display: grid;
+    gap: 6px;
+    font-size: 12px;
+    color: $color-text-secondary;
+  }
+
+  &__econ-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    span {
+      color: $color-text-soft;
+    }
+  }
+
+  /* ======================
+     CONTENT
+  ====================== */
+  &__empty {
+    padding: 14px;
+    color: $color-text-soft;
+    font-size: 13px;
+  }
+
+  &__list {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    overflow: auto;
+    min-height: 0;
+  }
+
+  &__item {
+    border: 1px solid $color-border-subtle;
+    border-radius: $radius-md;
+    background: $color-main-surface;
+    color: $color-text-primary;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+
+    transition: background 0.12s ease, border-color 0.12s ease,
+      transform 0.12s ease;
+
+    &:hover {
+      background: $color-card-bg-hover;
+      border-color: $color-border-strong;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__item-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+
+  &__item-title {
+    font-weight: 600;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__item-time {
+    font-size: 12px;
+    color: $color-text-soft;
+    white-space: nowrap;
+  }
+
+  &__meta {
+    display: grid;
+    gap: 4px;
+    font-size: 12px;
+    color: $color-text-secondary;
+  }
+
+  &__meta-row span {
+    color: $color-text-soft;
+  }
+
+  &__note {
+    margin-top: 8px;
+    font-size: 12px;
+    color: $color-text-secondary;
+    border-top: 1px dashed rgba($color-border-subtle, 0.8);
+    padding-top: 8px;
+  }
+}
